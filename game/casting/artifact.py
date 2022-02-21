@@ -44,8 +44,10 @@ class Artifact(Actor):
         y = self._position.get_y() + 5
         
         if y == 600:
-            print("artifact out of range")
             y = 0
         
         self._position = Point(self._position.get_x(), y)
+
+    def __del__(self):
+        print("artifact deleted")
        
