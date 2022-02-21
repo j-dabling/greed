@@ -1,5 +1,5 @@
 from game.casting.actor import Actor
-
+from game.shared.point import Point
 
 class Artifact(Actor):
     """
@@ -29,3 +29,23 @@ class Artifact(Actor):
             message (string): The given message.
         """
         self._message = message
+
+    def move_down(self):
+        """Moves the actor to its next position according to its velocity. Will wrap the position 
+        from one side of the screen to the other when it reaches the given maximum x and y values.
+        
+        Args:
+            max_x (int): The maximum x value.
+            max_y (int): The maximum y value.
+        """
+        # x = (self._position.get_x() + self._velocity.get_x()) % max_x
+        # y = (self._position.get_y() + self._velocity.get_y()) % max_y
+        # self._position = Point(x, y)
+        y = self._position.get_y() + 5
+        
+        if y == 600:
+            print("artifact out of range")
+            y = 0
+        
+        self._position = Point(self._position.get_x(), y)
+       
