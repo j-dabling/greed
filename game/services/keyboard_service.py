@@ -49,4 +49,9 @@ class KeyboardService:
         return direction
 
     def setYMotion(self, status):
+        """ On/Off switch for the ability to move vertically on the screen.
+
+        Args:
+            status (Boolean): True if player is now able to move vertically, False if not.
+        """
         self._y_motion = status

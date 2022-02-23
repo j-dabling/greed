@@ -7,4 +7,5 @@ class Gem(Artifact):
         self._point_value = 1
 
     def get_point_value(self):
+        # Returns the amount of points to add to the score on contact.
         return self._point_value

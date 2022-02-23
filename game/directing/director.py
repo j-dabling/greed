@@ -70,10 +70,8 @@ class Director:
                 artifact.refresh()
 
                 if isinstance(artifact, Ruby):
-                    print("It's a ruby!")
                     self._keyboard_service.setYMotion(True)
                 elif isinstance(artifact, Lead):
-                    print("It's Lead!")
                     self._keyboard_service.setYMotion(False)
 
         
