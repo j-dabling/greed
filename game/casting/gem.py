@@ -5,3 +5,6 @@ class Gem(Artifact):
     def __init__(self):
         super().__init__()
         self._point_value = 1
+
+    def get_point_value(self):
+        return self._point_value
