@@ -58,10 +58,14 @@ class Director:
         
         for artifact in artifacts:
             artifact.move_down()
+            
 
             if robot.get_position().equals(artifact.get_position()):
                 message = artifact.get_message()
                 banner.set_text(message)
+
+                cast.remove_actor("artifacts", artifact)
+
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
