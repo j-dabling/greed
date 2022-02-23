@@ -1,3 +1,6 @@
+from game.casting.ruby import Ruby
+from game.casting.lead import Lead
+
 class Director:
     """A person who directs the game. 
     
@@ -18,7 +21,7 @@ class Director:
         self._keyboard_service = keyboard_service
         self._video_service = video_service
 
-        self.player_score = 0
+        self.player_score = 600
         
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -63,13 +66,15 @@ class Director:
             
 
             if robot.get_position().equals(artifact.get_position()):
-                message = artifact.get_message()
-                banner.set_text(message)
-
                 self.player_score += artifact.get_point_value()
-
-                # cast.remove_actor("artifacts", artifact)
                 artifact.refresh()
+
+                if isinstance(artifact, Ruby):
+                    print("It's a ruby!")
+                    self._keyboard_service.setYMotion(True)
+                elif isinstance(artifact, Lead):
+                    print("It's Lead!")
+                    self._keyboard_service.setYMotion(False)
 
         
     def _do_outputs(self, cast):
