@@ -4,6 +4,11 @@ import random
 from game.casting.actor import Actor
 from game.casting.artifact import Artifact
 from game.casting.cast import Cast
+from game.casting.rock import Rock
+from game.casting.lead import Lead
+from game.casting.gem import Gem
+from game.casting.ruby import Ruby
+from game.casting.diamond import Diamond
 
 from game.directing.director import Director
 
@@ -57,8 +62,29 @@ def main():
         data = file.read()
         messages = data.splitlines()
 
+    # for n in range(DEFAULT_ARTIFACTS):
+    #     text = chr(random.randint(33, 126))
+    #     message = messages[n]
+
+    #     x = random.randint(1, COLS - 1)
+    #     y = random.randint(1, ROWS - 1)
+    #     position = Point(x, y)
+    #     position = position.scale(CELL_SIZE)
+
+    #     r = random.randint(0, 255)
+    #     g = random.randint(0, 255)
+    #     b = random.randint(0, 255)
+    #     color = Color(r, g, b)
+        
+    #     artifact = Artifact()
+    #     artifact.set_text(text)
+    #     artifact.set_font_size(FONT_SIZE)
+    #     artifact.set_color(color)
+    #     artifact.set_position(position)
+    #     artifact.set_message(message)
+    #     cast.add_actor("artifacts", artifact)
     for n in range(DEFAULT_ARTIFACTS):
-        text = chr(random.randint(33, 126))
+        #text = chr(random.randint(33, 126))
         message = messages[n]
 
         x = random.randint(1, COLS - 1)
@@ -70,14 +96,36 @@ def main():
         g = random.randint(0, 255)
         b = random.randint(0, 255)
         color = Color(r, g, b)
-        
-        artifact = Artifact()
-        artifact.set_text(text)
+
+        chance = random.randint(0, 1000)
+        if 0 <= chance < 250:
+            # Spawn in Gem.
+            artifact = Gem()
+            artifact.set_text('*')
+        elif 250 <= chance < 500:
+            # Spawn in Rock.
+            artifact = Rock()
+            artifact.set_text('0')
+        elif 500 <= chance < 625:
+            # Spawn in Ruby.
+            artifact = Ruby()
+            artifact.set_text('%')
+        elif 625 <= chance < 750:
+            # Spawn in Lead.
+            artifact = Lead()
+            artifact.set_text('!!')
+        elif 750 <= chance <= 1000:
+            # Spawn in Diamond.
+            artifact = Diamond()
+            artifact.set_text('&')
+
+        #artifact.set_text(text)
         artifact.set_font_size(FONT_SIZE)
         artifact.set_color(color)
         artifact.set_position(position)
         artifact.set_message(message)
         cast.add_actor("artifacts", artifact)
+        
     
     # start the game
     keyboard_service = KeyboardService(CELL_SIZE)
